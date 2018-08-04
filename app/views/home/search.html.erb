@@ -1,0 +1,72 @@
+<h5>Search result for term <em>'<%= @query %>'</em> resulted in <%= pluralize(@total_hits, 'hit') %></h5>
+<p class="supertiny">&nbsp;</p>
+
+<% unless @camps.empty? %>
+  <p><em><strong>Camps matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for camp in @camps do %>
+      <li><%= link_to camp.name, camp_path(camp) %></li>
+    <% end %>
+  </ul>
+  <p class="smtext">&nbsp;</p>
+<% end %>
+
+<% unless @curriculums.empty? %>
+  <p><em><strong>Curriculums matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for curr in @curriculums do %>
+      <li><%= link_to curr.name, curriculum_path(curr) %></li>
+    <% end %>
+  </ul>
+  <p class="supertiny">&nbsp;</p>
+<% end %>
+
+<% unless @instructors.empty? %>
+  <p><em><strong>Instructors matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for instructor in @instructors do %>
+      <li><%= link_to instructor.proper_name, instructor_path(instructor) %></li>
+    <% end %>
+  </ul>
+  <p class="supertiny">&nbsp;</p>
+<% end %>
+
+<% unless @locations.empty? %>
+  <p><em><strong>Locations matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for location in @locations do %>
+      <li><%= link_to location.name, location_path(location) %></li>
+    <% end %>
+  </ul>
+  <p class="supertiny">&nbsp;</p>
+<% end %>
+
+<% unless @families.empty? %>
+  <p><em><strong>Families matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for family in @families do %>
+      <li><%= link_to family.family_name, family_path(family) %></li>
+    <% end %>
+  </ul>
+  <p class="supertiny">&nbsp;</p>
+<% end %>
+
+<% unless @students.empty? %>
+  <p><em><strong>Students matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for student in @students do %>
+      <li><%= link_to student.proper_name, student_path(student) %></li>
+    <% end %>
+  </ul>
+  <p class="supertiny">&nbsp;</p>
+<% end %>
+
+<% unless @users.empty? %>
+  <p><em><strong>Users matching term '<%= @query %>'</strong></em></p>
+  <ul>
+    <% for user in @users do %>
+      <li><%= link_to user.username, user_path(user) %></li>
+    <% end %>
+  </ul>
+  <p class="supertiny">&nbsp;</p>
+<% end %>

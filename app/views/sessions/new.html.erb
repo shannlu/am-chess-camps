@@ -1,0 +1,43 @@
+<div class="row">
+  <h3 class="center">Log In</h3>
+  <div class="col s3">
+  </div>
+  <div class="col s6">
+    <%= flash[:error] %>
+    <div class="card yellow lighten-4">
+      <div class="card-content">
+        <%= render :partial => "partials/flash" %>
+          <%= form_with url: sessions_path, local: true do |f| %>
+          <div>
+            <%= f.label :username %>
+            <div class="center">
+              <%= f.text_field :username %>
+            </div>
+          </div>
+
+          <div>
+            <%= f.label :password %>
+            <div class="center">
+              <%= f.password_field :password %>
+            </div>
+          </div>
+          <!-- <div class="actions"><%= f.submit "Log In" %></div> -->
+          <div class="form-actions center">
+            <%= f.button :submit %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col s3">
+  </div>
+</div>
+<div class="row">
+  <div class="col s3">
+  </div>
+  <div class="col s6">
+    <p>Don't have an account? <%= link_to "Sign up", signup_path %>.</p>
+  </div>
+  <div class="col s3">
+  </div>
+</div>

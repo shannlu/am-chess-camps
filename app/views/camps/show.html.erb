@@ -1,0 +1,18 @@
+  <div class="row">
+    <div class="col s7">
+      <%= render :partial => "camp_details" %>
+    </div>
+    <% if logged_in? && current_user.role?(:admin) %>
+      <div class="col s5">
+        <%= render :partial => "camp_instructors_vue"%>
+        <%# render :partial => "camp_students"%>
+      </div>
+      <div class="col s12">
+        <%= render :partial => "partials/object_options", locals: {model_name: "camp", object: @camp} %>
+      </div>
+    <% elsif logged_in? && current_user.role == "parent" %>
+        <div class="col s5">
+          <%= render :partial => "camp_registrations_vue"%>
+        </div>
+    <% end %>
+    </div>

@@ -1,0 +1,39 @@
+<p id="notice"><%= flash.notice %></p>
+<% if !Family.find_by(user_id: current_user.id).nil? %>
+  <% fam_id = Family.find_by(user_id: current_user.id).id %>
+  <% if Student.where(family_id: fam_id).empty? %>
+    <h3>Your students are not registered for any camps at the moment.</h3>
+  <% else %>
+    <h3>Registrations</h3><br>
+    <% Student.where(family_id: fam_id).each do |student| %>
+      <% if !Registration.where(student_id: student.id).empty? %>
+      <h5><%= link_to student.proper_name, student_path(student) %></h5>
+        <table>
+        <thead>
+          <tr>
+            <th>Camps Registered</th>
+            <th>Registration Details</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% Registration.where(student_id: student.id).each do |reg| %>
+            <tr>
+              <td><%= link_to Camp.find_by(id: reg.camp_id).name, camp_path(reg.camp_id) %></td>
+              <td><%= link_to 'Show Registration List', registration_path(reg.id), :class=>"btn waves-effect waves-light blue" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        </table>
+        <br><br>
+    <% else %>
+      <h5><%= link_to student.proper_name, student_path(student) %> is not registered for any camps at the moment.</h5>
+    <% end %>
+  <% end %>
+  <% end %>
+<% else %>
+  <h3>Your students are not registered for any camps at the moment.</h3>
+<% end %>
+<br>
+
+<%= link_to 'Browse Camps to Register', camps_path, :class=>"btn waves-effect waves-light blue" %>

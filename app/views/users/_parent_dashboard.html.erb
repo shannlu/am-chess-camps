@@ -1,0 +1,40 @@
+<h1>Welcome!</h1>
+<br>
+<% if Family.where(user_id: current_user.id).empty? %>
+  <h5>To get started: </h5>
+  <div class="row">
+    <%= link_to 'Create a Family', new_family_path, :class=>"btn waves-effect waves-light" %></td>
+  </div>
+  <div class="center">
+    <p>OR</p>
+  </div>
+<% elsif Student.where(family_id: Family.where(user_id: current_user.id).first.id).empty? %>
+  <h5>To get started: </h5>
+  <div class="row">
+    <%= link_to 'Add a Student', new_student_path, :class=>"btn waves-effect waves-light" %></td>
+  </div>
+  <div class="center">
+    <p>OR</p>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col s4">
+    <%= link_to camps_path do %>
+       <%= image_tag("option1.jpg") %>
+    <% end %>
+    <!-- <%= link_to 'Browse Camps', camps_path, :class=>"btn waves-effect waves-light" %></td> -->
+  </div>
+  <div class="col s4">
+    <%= link_to students_path do %>
+       <%= image_tag("option2.jpg") %>
+    <% end %>
+    <!-- <%= link_to 'View Students', students_path, :class=>"btn waves-effect waves-light" %></td> -->
+  </div>
+  <div class="col s4">
+    <%= link_to registrations_path do %>
+       <%= image_tag("option3.jpg") %>
+    <% end %>
+    <!-- <%= link_to 'See Registrations', registrations_path, :class=>"btn waves-effect waves-light" %></td> -->
+  </div>
+</div>

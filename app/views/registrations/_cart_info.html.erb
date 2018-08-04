@@ -1,0 +1,20 @@
+<div id="cart-info" style="position: relative; bottom: 10px;">
+	<div class="section">
+		<h5 style="margin-bottom: 15px;">Summary</h5>
+		<hr class="grey-line"/>
+		<div class="row">
+			<div class="small-6 columns">
+				Total
+			</div>
+			<div class="small-6 columns" style="float: right;">
+				<span class="cart-total"><%= @cost %></span>
+			</div>
+		</div>
+		<!-- Checkout -->
+		<%= link_to cart_checkout_path do %>
+			<button data-open="payment-modal" class="full-width gold-button" style="margin-top: 15px;">
+				Proceed to Checkout
+			</button>
+		<% end %>
+	</div>
+</div>

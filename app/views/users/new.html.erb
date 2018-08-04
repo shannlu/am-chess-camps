@@ -1,0 +1,18 @@
+<% if logged_in? && current_user.role?(:admin) %>
+<div class="row">
+	<div class="col s8">
+		<h3>New User</h3>
+		<br>
+		<%= render 'form' %>
+	</div>
+</div>
+<% else %>
+<div class="row">
+	<div class="col s8">
+		<h3>Sign up</h3>
+			<p>Already have an account? <%= link_to "Log in", login_path %>.</p>
+		<br>
+		<%= render 'form' %>
+	</div>
+</div>
+<% end %>

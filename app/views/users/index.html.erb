@@ -1,0 +1,37 @@
+<div class="large-basic-container">
+	<h5>Users</h5>
+	<table class="hover">
+	  <thead>
+	    <tr>
+	      <th width="50">ID</th>
+	      <th>Username</th>
+	      <th>Email</th>
+				<th>Phone</th>
+	      <th width="100">Role</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	  	<% for user in @users %>
+		  		<tr id="user-<%= user.id %>-row">
+		  		  <td><%= user.id %></td>
+		  		  <td><%= user.username %></td>
+		  		  <td><%= user.email %></td>
+						<td><%= user.phone %></td>
+		  		  <td><%= user.role %></td>
+		  		</tr>
+	  	<% end %>
+	  </tbody>
+	</table>
+	<% if @users == nil || @users.empty? %>
+		There are no users to be shown.
+	<% end %>
+</div>
+<br>
+
+<span class="paginate">
+  <%= will_paginate @users, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", :param_name => 'users' %>
+</span>
+<br>
+<% if logged_in? && current_user.role?(:admin) %>
+	<%= link_to 'New user', signup_path %>
+<% end %>

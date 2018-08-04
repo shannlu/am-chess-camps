@@ -1,0 +1,106 @@
+<nav id="nav" class="grey darken-4">
+  <div class="custom-container">
+    <div class="row">
+      <%= link_to 'A&M CHESS', home_path, class: "brand-logo logo", style: "padding-top: 20px" %>
+
+      <div class="right">
+        <% if logged_in? %>
+					Hello, <%= !Family.where(user_id: current_user.id).empty? ? current_user_name : current_user.username%>!&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to 'Logout', logout_path %>
+				<% else %>
+					<%= link_to 'Login / Register', login_path %>
+				<% end %>
+
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
+<nav id="nav" class="grey darken-4">
+  <div class="custom-container">
+    <div class="row">
+      <div class="col s4">
+      </div>
+      <div class="col s4">
+      </div>
+      <div class="col s4">
+      <ul class="right">
+        <% if current_user != nil %>
+        <% if current_user.role?(:admin) %>
+          <!-- <li><%= link_to 'Profile', user_dashboard_path %></li> -->
+          <li>
+          <%= link_to user_dashboard_path do %>
+             <%= image_tag("profile.png") %>
+          <% end %>
+          </li>
+        <% else %>
+          <!-- <li><%= link_to 'Profile', user_path(current_user.id) %></li> -->
+          <li>
+          <%= link_to user_path(current_user.id) do %>
+             <%= image_tag("profile.png") %>
+          <% end %>
+          </li>
+        <% end %>
+        <!-- <li><%= link_to 'Cart', cart_path %></li> -->
+        <li>
+          <%= link_to cart_path do %>
+             <%= image_tag("cart.png") %>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
+<nav id="nav" class="grey darken-4">
+  <div class="custom-container">
+
+      <ul class="left hide-on-med-and-down" style="margin-left: 30px">
+        <li><%= link_to 'Camps', camps_path %></li>
+        <li><%= link_to 'Curriculums', curriculums_path %></li>
+        <li><%= link_to 'Instructors', instructors_path %></li>
+        <li><%= link_to 'Locations', locations_path %></li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <% if current_user != nil %>
+            <% if current_user.role == "admin" %>
+            <li>
+              <%= link_to 'Users', users_path %>
+            </li>
+            <li>
+              <%= link_to 'Families', families_path %>
+            </li>
+            <% end %>
+						<li>
+							<%= link_to 'Students', students_path %>
+						</li>
+						<li>
+							<%= link_to 'Registrations', registrations_path %>
+						</li>
+				<% end %>
+      </ul>
+  </div>
+</nav>
+
+<!--
+<header style="background-color: grey;">
+  <div class="custom-container">
+    <div class="row">
+      <%= link_to 'A&M CHESS', home_path, class: "brand-logo logo", style: "padding-top: 20px" %>
+      <div class="right">
+        <% if logged_in? %>
+					Hello, <%= !Family.where(user_id: current_user.id).empty? ? current_user_name : current_user.username%>!&nbsp;&nbsp;|&nbsp;&nbsp;<%= link_to 'Logout', logout_path %>
+				<% else %>
+					<%= link_to 'Login / Register', login_path %>
+				<% end %>
+      </div>
+    </div>
+
+
+  </div>
+</header> -->

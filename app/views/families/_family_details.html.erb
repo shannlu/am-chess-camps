@@ -1,0 +1,37 @@
+<h3><%= @family.family_name %> Family</h3>
+
+<h5>Basic Information</h5>
+<p><strong>Parent: </strong><%= @family.parent_name%></p>
+<p><strong>Username: </strong><%= @family.user.username %></p>
+<p><strong>Active:</strong>
+  <%= @family.active ? "Yes" : "No" %>
+</p>
+
+<% if @family.students.empty? %>
+  <h3>There are no students in the family at this time</h3>
+<% else %>
+  <h3>Students</h3>
+
+  <table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Rating</th>
+      <th>Active</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @family.students.each do |student| %>
+      <tr>
+        <td><%= link_to student.proper_name, student %></td>
+        <td><%= student.rating %></td>
+        <td><%= student.active == true ? "Yes" : "No"  %></td>
+        <td><%= link_to 'Edit', edit_student_path(student), :class=>"btn waves-effect waves-light blue" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>

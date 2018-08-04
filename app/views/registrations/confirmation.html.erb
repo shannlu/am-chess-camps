@@ -1,0 +1,8 @@
+<h3>Registration Confirmation</h3>
+<br><br>Successfully completed registration!<br>
+<% @registrations.each do |registration| %>
+  <p>payment <%= registration.payment%></p>
+  <p>camp id <%= registration.camp_id%></p>
+  <p>student id <%= registration.student_id%></p>
+  <p>count <%= @paid_count%></p>
+<% end %>

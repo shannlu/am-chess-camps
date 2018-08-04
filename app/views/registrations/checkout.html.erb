@@ -1,0 +1,56 @@
+<div class="row">
+	<!-- Item Info -->
+	<h3>Payment</h3>
+	<div class="col s7">
+
+		<%= simple_form_for(@registration, :url => registrations_place_path(@registration), :method => :post) do |f| %>
+			<%= f.error_notification %>
+			<%= flash[:error] %>
+			<!-- <%=@registration.errors.full_messages%> -->
+			<%= f.error :base %><br>
+		  <div class="row">
+		    <div class="form-inputs">
+		      <%= f.input :credit_card_number, label_html: { class: 'active'}%>
+					<%= f.input :expiration_month, label_html: { class: 'active'}%>
+					<%= f.input :expiration_year, label_html: { class: 'active'}%>
+		    </div>
+		  </div>
+		  <div class="row">
+		    <div class="form-actions col s8">
+		      <!-- <%= f.button :submit %> -->
+					<%= f.button :submit, 'Submit', class: 'password_reset_btn' %>
+		    </div>
+		  </div>
+		<% end %>
+
+	</div>
+	<div class="col s1">
+	</div>
+	<!-- Payment Options -->
+	<div class="col s4">
+				<div class="row">
+				<h5>Review Order</h5>
+				<table>
+				<thead>
+					<tr>
+						<th>Student</th>
+						<th>Camp</th>
+						<th>Price</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% session[:cart].each do |cart_item| %>
+						<tr>
+							<td><%= cart_item['student_name'] %></td>
+							<td><%= cart_item['camp_name'] %></td>
+							<td>$<%= cart_item['cost'] %>0</td>
+						</tr>
+					<% end %>
+				</tbody>
+				</table>
+				<br>
+						Total: $<%= @cost %>0
+				</div>
+	</div>
+</div>

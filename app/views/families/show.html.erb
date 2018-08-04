@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col s5">
+    <%= render :partial => "family_details" %>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <%= render :partial => "partials/object_options", locals: {model_name: "family", object: @family} %>
+  </div>
+</div>

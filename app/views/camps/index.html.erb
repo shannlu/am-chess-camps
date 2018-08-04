@@ -1,0 +1,11 @@
+<% if logged_in? && current_user.role?(:admin) %>
+  <%= render partial: "partials/index_structure", locals: {model_name: "camp",
+                                                           primary: "active_camps",
+                                                           secondary: "inactive_camps",
+                                                           sidebar: nil} %>
+<% else %>
+  <%= render partial: "partials/index_structure", locals: {model_name: "camp",
+                                                           primary: "active_camps",
+                                                           secondary: nil,
+                                                           sidebar: nil} %>
+<% end %>

@@ -1,0 +1,21 @@
+<%= simple_form_for(@instructor, multipart: true) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error :base %><br>
+  <div class="row">
+    <div class="form-inputs">
+      <%= f.input :first_name, label_html: { class: 'active' } %>
+      <%= f.input :last_name, label_html: { class: 'active' } %>
+      <%= f.input :bio, label_html: { class: 'active' } %>
+      <%# f.input :email, label_html: { class: 'active' } %>
+      <%# f.input :phone, label_html: { class: 'active' } %>
+      <%= f.input :user_id, collection: User.all, label_method: :username, include_blank: true %>
+      <%= f.file_field :photo, label_html: {class: 'active'} %>
+      <%= f.input :active %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-actions col s8">
+      <%= f.button :submit %>
+    </div>
+  </div>
+<% end %>

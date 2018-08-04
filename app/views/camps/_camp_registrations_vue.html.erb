@@ -1,0 +1,27 @@
+<div id="regs-vue">
+    <%= hidden_field_tag "camp_id", @camp.id %>
+    <div class="card indigo lighten-2">
+      <div class="card-content white-text">
+        <!-- <span class="card-title">Register Student for Camp</span> -->
+        <div class="card-action">
+        <%# link_to "Add a new instructor", "#" %>
+        <%= link_to "Register Student for Camp", "#", {%s(v-on:click) => "switch_modal()"} %>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="modal_open">
+      <new-student-form></new-student-form>
+    </div>
+
+
+  </div>  <!-- End of div#assignments -->
+
+
+
+
+  <!--  much easier to include this complicated template here
+        rather than in the js file (IMO) -->
+  <script type="text/x-template" id="camp-registration-form-template">
+    <%= render "camp_registration_form_template" %>
+  </script>

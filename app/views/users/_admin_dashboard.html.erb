@@ -1,0 +1,91 @@
+<h1>Administrator Information</h1>
+<br>
+<div class="row">
+  <div class="col s3 center" style="font-size: 700%;">
+    <%= Registration.all.count%>
+    <h5>total registrations</h5>
+  </div>
+  <div class="col s3 center" style="font-size: 700%;">
+    <%= Camp.active.count %>
+    <h5>active camps</h5>
+  </div>
+  <div class="col s3 center" style="font-size: 700%;">
+    <%= Student.active.count %>
+    <h5>active students</h5>
+  </div>
+  <div class="col s3 center" style="font-size: 700%;">
+    <%= Family.active.count %>
+    <h5>active families</h5>
+  </div>
+</div>
+<br><br>
+<div class="row">
+  <div class="col s6">
+    <h4>Popular Curriculums</h4>
+    <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Number of Camps</th>
+        <th>Number of Students</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @curriculums.each do |curr| %>
+        <tr>
+          <td><%= link_to curr.name, curr %></td>
+          <td><%= Camp.where(curriculum_id: curr.id).count %></td>
+          <td><%= Registration.where(camp_id: Camp.where(curriculum_id: curr.id).first.id).count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+  <div class="col s6">
+    <h4>Most Active Families</h4>
+    <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Number of Students</th>
+        <th>Number of Camps Registered</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @active_families.each do |fam| %>
+        <tr>
+          <td><%= link_to fam.family_name, fam %></td>
+          <td><%= fam.students.count %></td>
+          <td><%= Registration.where(student_id: Student.where(family_id: fam.id).first.id).count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>
+<div>
+  <h4>Most Popular Camps</h4>
+  <table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Dates</th>
+      <th>Location</th>
+      <th>Enrollment</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @camps.each do |camp| %>
+      <tr>
+        <td><%= link_to camp.name, camp %></td>
+        <td><%= camp.start_date.strftime("%m/%d/%y") %> - <%= camp.end_date.strftime("%m/%d/%y") %></td>
+        <td><%= camp.location.name %></td>
+        <td><%= camp.enrollment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

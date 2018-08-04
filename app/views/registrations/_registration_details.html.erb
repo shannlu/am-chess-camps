@@ -1,0 +1,28 @@
+<h3><%= @registration.camp.name %></h3>
+<p><strong>Dates: </strong><%= @registration.camp.start_date.strftime('%m/%d/%y') %> - <%= @registration.camp.end_date.strftime('%m/%d/%y') %></p>
+<p><strong>Rating: </strong><%= @registration.camp.curriculum.min_rating %> - <%= @registration.camp.curriculum.max_rating %></p>
+<p><strong>Open Spots: </strong><%= @registration.camp.max_students - @registration.camp.registrations.count  %></p>
+
+<br><br>
+<h5>Registration List</h5>
+<table>
+<thead>
+  <tr>
+    <th>Student Name</th>
+    <th>Age</th>
+    <th>Rating</th>
+  </tr>
+</thead>
+
+<tbody>
+  <% Registration.where(camp_id: @registration.camp_id).each do |reg| %>
+    <tr>
+      <td><%= reg.student.proper_name %></td>
+      <td><%= reg.student.age %></td>
+      <td><%= reg.student.rating %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+
+<%= link_to 'Back', registrations_path, :class=>"btn waves-effect waves-light blue" %>

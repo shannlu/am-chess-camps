@@ -1,0 +1,9 @@
+<h3><%= @student.proper_name %></h3>
+
+<h5>Basic Information</h5>
+<p><strong>Family: </strong><%= @student.family.family_name %></p>
+<p><strong>Birthday: </strong><%= @student.date_of_birth.strftime('%m/%d/%y') %></p>
+<p><strong>Rating: </strong><%= @student.rating %></p>
+<p><strong>Active:</strong>
+  <%= @student.active ? "Yes" : "No" %>
+</p>

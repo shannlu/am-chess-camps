@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<% if @registrations.empty? %>
+  <h3>There are no registrations in the system at this time</h3>
+<% else %>
+  <h3>All Registrations</h3><br>
+	<% @camps.each do |camp| %>
+
+		<h5><%= link_to camp.name + ' (' + camp.start_date.strftime("%m/%d/%y") + ' - ' + camp.end_date.strftime("%m/%d/%y") + ')', camp_path(camp) %></h5>
+    <p><strong>Dates: </strong><%= camp.start_date.strftime('%m/%d/%y') %> - <%= camp.end_date.strftime('%m/%d/%y') %></p>
+    <p><strong>Rating: </strong><%= camp.curriculum.min_rating %> - <%= camp.curriculum.max_rating %></p>
+    <p><strong>Open Spots: </strong><%= camp.max_students - camp.registrations.count  %></p>
+
+    <% if !Registration.where(camp_id: camp.id).empty? %>
+		  <table>
+		  <thead>
+		    <tr>
+		      <th>Student Name</th>
+          <th>Age</th>
+          <th>Rating</th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+		    <% Registration.where(camp_id: camp.id).each do |reg| %>
+		      <tr>
+		        <td><%= link_to Student.find_by(id: reg.student_id).name, student_path(reg.student_id) %></td>
+            <td><%= reg.student.age %></td>
+            <td><%= reg.student.rating %></td>
+		      </tr>
+				<% end %>
+		  </tbody>
+			</table>
+			<br><br>
+	<% else %>
+		<p> No registered students. </p><br><br>
+	<% end %>
+
+<% end %>
+
+<span class="paginate">
+  <%= will_paginate @camps, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next", :param_name => 'camps' %>
+</span>
+
+    <% end %>

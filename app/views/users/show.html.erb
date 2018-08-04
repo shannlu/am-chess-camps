@@ -1,0 +1,64 @@
+<h3>Your Profile</h3>
+<!-- <h3><%= @name %></h3> -->
+<br>
+<div class="row">
+	<div class="col s3">
+		<h5>Email Address</h5>
+		<%= @user.email ? @user.email : 'N/A' %>
+	</div>
+	<div class="col s3">
+		<h5>Phone Number</h5>
+		<%= (@user.phone && @user.phone != "") ? number_to_phone(Integer(@user.phone), area_code: true) : 'N/A' %>
+	</div>
+	<div class="col s3">
+		<h5>Username</h5>
+		<%= @user.username ? @user.username : 'N/A'  %>
+	</div>
+	<div class="col s3">
+		<h5></h5><br>
+		<%= link_to 'Edit Info', edit_user_path(@user), :class=>"btn waves-effect waves-light blue" %>
+	</div>
+</div>
+<br><br><br>
+
+<% if @user.role == "parent" %>
+	<div>
+		<% if !Family.where(user_id: current_user).nil?%>
+			<h3>Family Information</h3>
+		<% end %>
+	<% if @family.nil? %>
+		<%= link_to 'Create a Family', new_family_path, :class=>"btn waves-effect waves-light blue" %>
+	<% elsif @family.students.empty? %>
+	  <h5>There are no students in your family at this time</h5>
+		<%= link_to 'Add student', new_student_path, :class=>"btn waves-effect waves-light blue"  %>
+	<% else %>
+	  <h5>Students in your Family</h5>
+
+	  <table>
+	  <thead>
+	    <tr>
+	      <th>Name</th>
+	      <th>Rating</th>
+	      <th>Active</th>
+	      <th colspan="3"></th>
+	    </tr>
+	  </thead>
+
+	  <tbody>
+	    <% @family.students.each do |student| %>
+	      <tr>
+	        <td><%= link_to student.proper_name, student %></td>
+	        <td><%= student.rating %></td>
+	        <td><%= student.active == true ? "Yes" : "No"  %></td>
+	        <td><%= link_to 'Edit', edit_student_path(student), :class=>"btn waves-effect waves-light blue" %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	<%= link_to 'Add student', new_student_path, :class=>"btn waves-effect waves-light blue"  %>
+	<% end %>
+	<br><br>
+
+
+	</div>
+<% end %>

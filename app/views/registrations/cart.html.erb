@@ -1,0 +1,34 @@
+<%= flash.notice %>
+<h3>Registration Cart</h3>
+<% if !session[:cart].empty? %>
+	<table>
+	<thead>
+		<tr>
+			<th>Student</th>
+			<th>Camp</th>
+			<th>Dates</th>
+			<th>Price</th>
+			<th colspan="2"></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% session[:cart].each do |cart_item| %>
+			<tr>
+				<td><%= cart_item['student_name'] %></td>
+				<td><%= cart_item['camp_name'] %></td>
+				<td><%= cart_item['date'][5,10] + cart_item['date'][4] + cart_item['date'][0,4] %></td>
+				<td>$<%= cart_item['cost'] %>0</td>
+				<td><%= link_to 'Remove', cart_remove_path(cart_item), :class=>"btn waves-effect waves-light" %></td>
+			</tr>
+		<% end %>
+	</tbody>
+	</table>
+	<br><br>
+	<h5>Total: $ <%= @cost%>0</h5>
+	<br><br>
+	<%= link_to 'Proceed to Checkout', cart_checkout_path, class: "btn btn-primary"%>
+
+<% else %>
+  <h5>No registrations currently in the cart.</h5>
+<% end %>
